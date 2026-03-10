@@ -32,6 +32,7 @@ public class UserService {
             return;
         }
         System.out.println("Password validation enabled");
+        System.out.println("Password validation enabled");
 
         userDao.insertUser(user);
     }
