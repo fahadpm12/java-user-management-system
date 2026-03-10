@@ -27,6 +27,10 @@ public class UserService {
             System.out.println("Email cannot be empty");
             return;
         }
+        if(user.getPassword().length() < 6){
+            System.out.println("Password must be at least 6 characters");
+            return;
+        }
 
         userDao.insertUser(user);
     }
