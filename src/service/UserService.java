@@ -20,7 +20,14 @@ public class UserService {
      * This method receives a User object from Main
      * and asks DAO to save it in the database
      */
+    
     public void createUser(User user) {
+
+        if(user.getEmail() == null || user.getEmail().isEmpty()) {
+            System.out.println("Email cannot be empty");
+            return;
+        }
+
         userDao.insertUser(user);
     }
 
