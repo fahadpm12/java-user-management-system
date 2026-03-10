@@ -31,7 +31,7 @@ public class UserService {
             System.out.println("Password must be at least 6 characters");
             return;
         }
-        System.out.println("Password validation enabled");
+        
         System.out.println("Password validation enabled");
 
         userDao.insertUser(user);
