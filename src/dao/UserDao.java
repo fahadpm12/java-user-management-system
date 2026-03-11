@@ -175,7 +175,7 @@ public class UserDao {
     /*
      * Delete user
      */
-    public void deleteUser(int id) {
+    public boolean deleteUser(int id) {
 
         String sql = "DELETE FROM users WHERE id = ?";
 
@@ -184,7 +184,7 @@ public class UserDao {
 
             if (connection == null) {
                 System.out.println("Database connection failed.");
-                return;
+                return false;
             }
 
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -192,17 +192,15 @@ public class UserDao {
 
             int rows = statement.executeUpdate();
 
-            if (rows > 0) {
-                System.out.println("User deleted successfully.");
-            } else {
-                System.out.println("User not found.");
-            }
-
             statement.close();
             connection.close();
+
+            return rows > 0;
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        return false;
     }
 }

@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 import model.User;
 import service.UserService;
+import java.util.ArrayList;
+
 
 public class Main {
 
@@ -108,7 +110,13 @@ public class Main {
                     int deleteId = scanner.nextInt();
                     scanner.nextLine();
 
-                    userService.deleteUserById(deleteId);
+                    boolean isDeleted = userService.deleteUserById(deleteId);
+
+                    if (isDeleted) {
+                        System.out.println("User deleted successfully.");
+                    } else {
+                        System.out.println("User not found.");
+                    }
                     break;
 
                 case 6:

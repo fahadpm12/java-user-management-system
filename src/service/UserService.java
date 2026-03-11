@@ -65,7 +65,7 @@ public class UserService {
     /*
      * Delete user by ID
      */
-    public void deleteUserById(int id) {
-        userDao.deleteUser(id);
+    public boolean deleteUserById(int id) {
+        return userDao.deleteUser(id);
     }
 }
