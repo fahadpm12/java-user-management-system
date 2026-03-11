@@ -92,7 +92,7 @@ public class UserDao {
     /*
      * Find user by ID
      */
-    public void findUserById(int id) {
+    public User findUserById(int id) {
 
         String sql = "SELECT * FROM users WHERE id = ?";
 
@@ -101,7 +101,7 @@ public class UserDao {
 
             if (connection == null) {
                 System.out.println("Database connection failed.");
-                return;
+                return null;
             }
 
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -110,15 +110,18 @@ public class UserDao {
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
-                System.out.println(
-                        "User Found -> " +
-                        resultSet.getInt("id") + " | " +
-                        resultSet.getString("name") + " | " +
-                        resultSet.getString("email") + " | " +
-                        resultSet.getString("role")
-                );
-            } else {
-                System.out.println("User not found.");
+                User user = new User();
+                user.setId(resultSet.getInt("id"));
+                user.setName(resultSet.getString("name"));
+                user.setEmail(resultSet.getString("email"));
+                user.setPassword(resultSet.getString("password"));
+                user.setRole(resultSet.getString("role"));
+
+                resultSet.close();
+                statement.close();
+                connection.close();
+
+                return user;
             }
 
             resultSet.close();
@@ -128,8 +131,9 @@ public class UserDao {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
 
+        return null;
+    }
     /*
      * Update user
      */

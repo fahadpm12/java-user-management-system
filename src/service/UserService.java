@@ -47,8 +47,8 @@ public class UserService {
     /*
      * Find user by ID
      */
-    public void findUserById(int id) {
-        userDao.findUserById(id);
+    public User findUserById(int id) {
+        return userDao.findUserById(id);
     }
 
     /*

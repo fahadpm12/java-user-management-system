@@ -59,11 +59,18 @@ public class Main {
 
                 case 3:
                     System.out.print("Enter user ID to find: ");
-                    int findId = scanner.nextInt();
-                    scanner.nextLine();
+                int findId = scanner.nextInt();
+                scanner.nextLine();
 
-                    userService.findUserById(findId);
-                    break;
+                User foundUser = userService.findUserById(findId);
+
+                if (foundUser != null) {
+                    System.out.println("User found:");
+                    System.out.println(foundUser);
+                } else {
+                    System.out.println("User not found.");
+                }
+                break;
 
                 case 4:
                     User updateUser = new User();
