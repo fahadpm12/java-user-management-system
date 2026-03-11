@@ -6,6 +6,7 @@ import util.DatabaseConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class UserDao {
 
@@ -48,7 +49,9 @@ public class UserDao {
     /*
      * Fetch all users from database
      */
-    public void fetchAllUsers() {
+    public ArrayList<User> fetchAllUsers() {
+
+        ArrayList<User> users = new ArrayList<>();
 
         String sql = "SELECT * FROM users";
 
@@ -57,27 +60,22 @@ public class UserDao {
 
             if (connection == null) {
                 System.out.println("Database connection failed.");
-                return;
+                return users;
             }
 
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
 
-            boolean hasUsers = false;
-
             while (resultSet.next()) {
-                hasUsers = true;
+                User user = new User();
 
-                System.out.println(
-                        "ID: " + resultSet.getInt("id") +
-                        ", Name: " + resultSet.getString("name") +
-                        ", Email: " + resultSet.getString("email") +
-                        ", Role: " + resultSet.getString("role")
-                );
-            }
+                user.setId(resultSet.getInt("id"));
+                user.setName(resultSet.getString("name"));
+                user.setEmail(resultSet.getString("email"));
+                user.setPassword(resultSet.getString("password"));
+                user.setRole(resultSet.getString("role"));
 
-            if (!hasUsers) {
-                System.out.println("No users found.");
+                users.add(user);
             }
 
             resultSet.close();
@@ -87,8 +85,9 @@ public class UserDao {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
 
+        return users;
+    }
     /*
      * Find user by ID
      */

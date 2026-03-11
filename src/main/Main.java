@@ -54,7 +54,16 @@ public class Main {
 
                 case 2:
                     System.out.println("\n===== All Users =====");
-                    userService.getAllUsers();
+
+                    java.util.ArrayList<User> users = userService.getAllUsers();
+
+                    if (users.isEmpty()) {
+                        System.out.println("No users found.");
+                    } else {
+                        for (User user : users) {
+                            System.out.println(user);
+                        }
+                    }
                     break;
 
                 case 3:

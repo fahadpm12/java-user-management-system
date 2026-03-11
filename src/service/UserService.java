@@ -1,6 +1,9 @@
 package service;
 
 import model.User;
+
+import java.util.ArrayList;
+
 import dao.UserDao;
 
 /*
@@ -40,8 +43,9 @@ public class UserService {
     /*
      * Get all users from database
      */
-    public void getAllUsers() {
-        userDao.fetchAllUsers();
+   
+    public ArrayList<User> getAllUsers() {
+        return userDao.fetchAllUsers();
     }
 
     /*
