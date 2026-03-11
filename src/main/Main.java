@@ -102,7 +102,13 @@ public class Main {
                     System.out.print("Enter new role (ADMIN/USER): ");
                     updateUser.setRole(scanner.nextLine());
 
-                    userService.updateUser(updateUser);
+                    boolean isUpdated = userService.updateUser(updateUser);
+
+                    if (isUpdated) {
+                        System.out.println("User updated successfully.");
+                    } else {
+                        System.out.println("User not found.");
+                    }
                     break;
 
                 case 5:

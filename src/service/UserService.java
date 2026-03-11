@@ -58,8 +58,8 @@ public class UserService {
     /*
      * Update user details
      */
-    public void updateUser(User user) {
-        userDao.updateUser(user);
+    public boolean updateUser(User user) {
+        return userDao.updateUser(user);
     }
 
     /*
